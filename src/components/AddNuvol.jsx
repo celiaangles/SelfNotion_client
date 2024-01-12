@@ -18,6 +18,7 @@ function AddNuvol(props) {
         // Reset the state
         setPapallona("");
         setCuc("");
+
         props.refreshNuvols();
       })
       .catch((error) => console.log(error));

@@ -28,14 +28,12 @@ function ObjectiuDetailsPage(props) {
         <>
           <h1>{objectiu.serp}</h1>
           <p>{objectiu.mico}</p>
-          <p>a ver k tal</p>
         </>
       )}
 
-      <Link to="/objectius">
+      <Link to="/projects">
         <button>Back to objectius</button>
       </Link>
-      <h1>perro flauta</h1>
 
       <Link to={`/objectius/edit/${objectiuId}`}>
         <button>Edit Objectiu</button>
