@@ -16,8 +16,9 @@ function AddObjectiu(props) {
       .post(`${API_URL}/api/objectius`, requestBody)
       .then((response) => {
         // Reset the state
-        setObjectiu("");
-        setObjectiu("");
+        setSerp("");
+        setMico("");
+
         props.refreshObjectius();
       })
       .catch((error) => console.log(error));

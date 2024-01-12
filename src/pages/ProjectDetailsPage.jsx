@@ -49,7 +49,6 @@ function ProjectDetailsPage(props) {
       <Link to="/projects">
         <button>Back to projects</button>
       </Link>
-      <h1>joder</h1>
 
       <Link to={`/projects/edit/${projectId}`}>
         <button>Edit Project</button>

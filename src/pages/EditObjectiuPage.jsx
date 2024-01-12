@@ -17,9 +17,9 @@ function EditObjectiuPage(props) {
       .then((response) => {
         const oneObjectiu = response.data;
         setSerp(oneObjectiu.serp);
-        setMico(oneNuvol.mico);
+        setMico(oneObjectiu.mico);
       })
-      .catch((error) => console.log(JODER02));
+      .catch((err) => console.log(err));
   }, [objectiuId]);
 
   const handleFormSubmit = (e) => {
@@ -27,13 +27,13 @@ function EditObjectiuPage(props) {
     const requestBody = { serp, mico };
 
     axios
-      .put(`${API_URL}/api/nuvols/${objectiuId}`, requestBody)
+      .put(`${API_URL}/api/objectius/${objectiuId}`, requestBody)
       .then((response) => {
         navigate(`/objectius/${objectiuId}`);
       });
   };
 
-  const deleteNuvol = () => {
+  const deleteObjectiu = () => {
     axios
       .delete(`${API_URL}/api/objectius/${objectiuId}`)
       .then(() => {
@@ -65,7 +65,7 @@ function EditObjectiuPage(props) {
         <button type="submit">Update Objectiu</button>
       </form>
 
-      <button onClick={deleteNuvol}>Delete Objectiu</button>
+      <button onClick={deleteObjectiu}>Delete Objectiu</button>
     </div>
   );
 }
