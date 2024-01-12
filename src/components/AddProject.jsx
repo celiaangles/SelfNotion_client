@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import { AuthContext } from "../context/auth.context"; // Adjust the path
 
 const API_URL = "http://localhost:5005";
 
@@ -8,13 +9,19 @@ function AddProject(props) {
   const [description, setDescription] = useState("");
   const [character, setCharacter] = useState("");
 
+  // const { storedToken } = useContext(AuthContext); // Assuming you have storedToken in your context
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const requestBody = { title, description, character };
 
+    const storedToken = localStorage.getItem("authToken");
+
     axios
-      .post(`${API_URL}/api/projects`, requestBody)
+      .post(`${API_URL}/api/projects`, requestBody, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
       .then((response) => {
         // Reset the state
         setTitle("");

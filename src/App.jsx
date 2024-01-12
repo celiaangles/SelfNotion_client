@@ -13,23 +13,34 @@ import EditNuvolPage from "./pages/EditNuvolPage";
 import ObjectiuDetailsPage from "./pages/ObjectiuDetailsPage";
 import EditObjectiuPage from "./pages/EditObjectiuPage";
 
+import SignupPage from "./pages/SignupPage";
+import LoginPage from "./pages/LoginPage";
+import IsPrivate from "./components/IsPrivate";
+import IsAnon from "./components/IsAnon";
+
 function App() {
   return (
     <div className="App">
       <Navbar />
 
       <Routes>
-        <Route exact path="/" element={<HomePage />} />
-        <Route exact path="/projects" element={<ProjectListPage />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/projects" element={<ProjectListPage />} />
         <Route
-          exact
           path="/projects/:projectId"
-          element={<ProjectDetailsPage />}
+          element={
+            <IsPrivate>
+              <ProjectDetailsPage />
+            </IsPrivate>
+          }
         />
         <Route
-          exact
           path="/projects/edit/:projectId"
-          element={<EditProjectPage />}
+          element={
+            <IsPrivate>
+              <EditProjectPage />
+            </IsPrivate>
+          }
         />
 
         <Route exact path="/nuvols" element={<NuvolListPage />} />
@@ -41,11 +52,23 @@ function App() {
           path="/objectius/:objectiuId"
           element={<ObjectiuDetailsPage />}
         />
+
         <Route
           exact
           path="/objectius/edit/:objectiuId"
           element={<EditObjectiuPage />}
         />
+
+        <Route
+          path="/signup"
+          element={
+            <IsAnon>
+              {" "}
+              <SignupPage />{" "}
+            </IsAnon>
+          }
+        />
+        <Route path="/login" element={<LoginPage />} />
       </Routes>
     </div>
   );
