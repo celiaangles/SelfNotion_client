@@ -10,6 +10,8 @@ import AddObjectiu from "../components/AddObjectiu";
 const API_URL = "http://localhost:5005";
 
 function ProjectListPage() {
+  const storedToken = localStorage.getItem("authToken");
+
   const [objectius, setObjectius] = useState([]);
   const [showAddObjectiu, setShowAddObjectiu] = useState(false); // new
 
@@ -18,9 +20,11 @@ function ProjectListPage() {
 
   const getAllProjects = () => {
     axios
-      .get(`${API_URL}/api/projects`)
+      .get(`${API_URL}/api/projects`, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
       .then((response) => setProjects(response.data))
-      .catch((error) => console.log(error));
+      .catch((error) => console.error("Error fetching projects:", error));
   };
 
   const getAllObjectius = () => {

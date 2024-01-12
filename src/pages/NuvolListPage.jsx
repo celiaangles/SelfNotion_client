@@ -27,7 +27,7 @@ function NuvolListPage() {
     <div className="NuvolListPage">
       <button onClick={() => setShowAddNuvol(!showAddNuvol)}>Add Nuvol</button>
 
-      {showAddNuvol && <AddNuvol refreshProjects={getAllNuvols} />}
+      {showAddNuvol && <AddNuvol refreshNuvols={getAllNuvols} />}
 
       {nuvols.map((nuvol) => (
         <NuvolCard key={nuvol._id} {...nuvol} />
