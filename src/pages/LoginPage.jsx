@@ -13,7 +13,7 @@ function LoginPage(props) {
   const [errorMessage, setErrorMessage] = useState(undefined);
 
   const navigate = useNavigate();
-  const { storeToken } = useContext(AuthContext); //  <== ADD
+  const { storeToken, authenticateUser, isLoggedIn } = useContext(AuthContext); //  <== ADD
 
   const handleEmail = (e) => setEmail(e.target.value);
   const handlePassword = (e) => setPassword(e.target.value);
@@ -25,15 +25,22 @@ function LoginPage(props) {
     axios
       .post(`${API_URL}/auth/login`, requestBody)
       .then((response) => {
-        // Request to the server's endpoint `/auth/login` returns a response
-        // with the JWT string ->  response.data.authToken
         console.log("JWT token", response.data.authToken);
-        storeToken(response.data.authToken); // <== ADD
 
-        navigate("/"); // <== ADD
+        storeToken(response.data.authToken); // <== ADD
+        authenticateUser();
+        if (isLoggedIn) {
+          console.log("User is logged in!"); // Log when the user is logged in
+          navigate("/"); // Redirect if the user is logged in
+        } else {
+          console.log("User is not logged in!"); // Log when the user is not logged in
+        }
       })
       .catch((error) => {
-        const errorDescription = error.response.data.message;
+        console.error("Error during login:", error);
+        const errorDescription = error.response
+          ? error.response.data.message
+          : "An error occurred";
         setErrorMessage(errorDescription);
       });
   };

@@ -1,20 +1,23 @@
-import { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
-import { AuthContext } from "../context/auth.context"; // Adjust the path
+import { AuthContext } from "../context/auth.context"; // Update the path
 
 const API_URL = "http://localhost:5005";
 
 function AddProject(props) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [character, setCharacter] = useState("");
-
-  // const { storedToken } = useContext(AuthContext); // Assuming you have storedToken in your context
+  const { user } = useContext(AuthContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const requestBody = { title, description, character };
+    if (!user) {
+      console.error("User not logged in.");
+      return;
+    }
+
+    const requestBody = { title, description, userId: user._id };
 
     const storedToken = localStorage.getItem("authToken");
 
@@ -50,14 +53,6 @@ function AddProject(props) {
           name="description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-        />
-
-        <label>Character:</label>
-        <textarea
-          type="text"
-          name="character"
-          value={character}
-          onChange={(e) => setCharacter(e.target.value)}
         />
 
         <button type="submit">Submit</button>

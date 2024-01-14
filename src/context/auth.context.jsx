@@ -36,6 +36,8 @@ function AuthProviderWrapper(props) {
         .catch((error) => {
           // If the server sends an error response (invalid token) ❌
           // Update state variables
+          console.error("Error during token verification:", error); // Log the error
+
           setIsLoggedIn(false);
           setIsLoading(false);
           setUser(null);

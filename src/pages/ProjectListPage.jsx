@@ -10,7 +10,7 @@ import AddObjectiu from "../components/AddObjectiu";
 const API_URL = "http://localhost:5005";
 
 function ProjectListPage() {
-  const storedToken = localStorage.getItem("authToken");
+  // const storedToken = localStorage.getItem("authToken");
 
   const [objectius, setObjectius] = useState([]);
   const [showAddObjectiu, setShowAddObjectiu] = useState(false); // new
@@ -19,6 +19,8 @@ function ProjectListPage() {
   const [showAddProject, setShowAddProject] = useState(false); // State to control visibility
 
   const getAllProjects = () => {
+    const storedToken = localStorage.getItem("authToken");
+
     axios
       .get(`${API_URL}/api/projects`, {
         headers: { Authorization: `Bearer ${storedToken}` },
