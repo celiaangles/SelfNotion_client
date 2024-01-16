@@ -25,7 +25,15 @@ function App() {
 
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/projects" element={<ProjectListPage />} />
+        <Route
+          path="/projects"
+          element={
+            <IsPrivate>
+              {" "}
+              <ProjectListPage />{" "}
+            </IsPrivate>
+          }
+        />
         <Route
           path="/projects/:projectId"
           element={

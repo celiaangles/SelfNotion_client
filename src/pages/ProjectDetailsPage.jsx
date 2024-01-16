@@ -12,8 +12,11 @@ function ProjectDetailsPage(props) {
   const [showAddTask, setShowAddTask] = useState(false); // State to control visibility
 
   const getProject = () => {
+    const storedToken = localStorage.getItem("authToken");
     axios
-      .get(`${API_URL}/api/projects/${projectId}`)
+      .get(`${API_URL}/api/projects/${projectId}`, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
       .then((response) => {
         const oneProject = response.data;
         setProject(oneProject);
