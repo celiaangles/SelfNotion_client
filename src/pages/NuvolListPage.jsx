@@ -8,20 +8,23 @@ const API_URL = "http://localhost:5005";
 
 function NuvolListPage() {
   const [nuvols, setNuvols] = useState([]);
-  const [showAddNuvol, setShowAddNuvol] = useState(false); // new
+  const [showAddNuvol, setShowAddNuvol] = useState(false);
 
   const getAllNuvols = () => {
     axios
       .get(`${API_URL}/api/nuvols`)
-      .then((response) => setNuvols(response.data))
+      .then((response) => {
+        console.log("API Response:", response.data);
+        setNuvols(response.data); // Adjust according to your response structure
+      })
       .catch((error) => console.log(error));
   };
 
-  // We set this effect will run only once, after the initial render
-  // by setting the empty dependency array - []
   useEffect(() => {
     getAllNuvols();
   }, []);
+
+  console.log("Nuvols:", nuvols);
 
   return (
     <div className="NuvolListPage">
@@ -29,9 +32,11 @@ function NuvolListPage() {
 
       {showAddNuvol && <AddNuvol refreshNuvols={getAllNuvols} />}
 
-      {nuvols.map((nuvol) => (
-        <NuvolCard key={nuvol._id} {...nuvol} />
-      ))}
+      {Array.isArray(nuvols) ? (
+        nuvols.map((nuvol) => <NuvolCard key={nuvol._id} {...nuvol} />)
+      ) : (
+        <p>No nuvols found.</p>
+      )}
     </div>
   );
 }

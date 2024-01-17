@@ -1,18 +1,23 @@
-import { Link } from "react-router-dom";
-import { useContext } from "react"; // <== IMPORT
+import { Link, useNavigate } from "react-router-dom";
+import { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
 
 function Navbar() {
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
+  const navigate = useNavigate(); // <== Use useNavigate instead of useHistory
+
+  const handleLogout = () => {
+    logOutUser();
+    navigate("/login"); // <== Redirect to the login page after logout
+  };
 
   return (
     <nav>
-      <Link to="/home">
-        <button>Home</button>
-      </Link>
-
       {isLoggedIn && (
         <>
+          <Link to="/home">
+            <button>Home</button>
+          </Link>
           <Link to="/projects">
             <button>Projects</button>
           </Link>
@@ -21,7 +26,7 @@ function Navbar() {
             <button>Nuvols</button>
           </Link>
 
-          <button onClick={logOutUser}>Logout</button>
+          <button onClick={handleLogout}>Logout</button>
           <span>{user && user.name}</span>
         </>
       )}
@@ -29,12 +34,10 @@ function Navbar() {
       {!isLoggedIn && (
         <>
           <Link to="/signup">
-            {" "}
-            <button>Sign Up</button>{" "}
+            <button>Sign Up</button>
           </Link>
           <Link to="/login">
-            {" "}
-            <button>Login</button>{" "}
+            <button>Login</button>
           </Link>
         </>
       )}

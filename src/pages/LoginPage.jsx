@@ -2,7 +2,7 @@
 
 import { useState, useContext } from "react"; // <== IMPORT useContext
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; // <== ADD useNavigate
 import { AuthContext } from "../context/auth.context"; // <== IMPORT
 
 const API_URL = "http://localhost:5005";
@@ -31,8 +31,7 @@ function LoginPage(props) {
         authenticateUser();
         if (isLoggedIn) {
           console.log("User is logged in!"); // Log when the user is logged in
-          navigate("/"); // Redirect if the user is logged in
-        } else {
+
           console.log("User is not logged in!"); // Log when the user is not logged in
         }
       })

@@ -3,20 +3,19 @@ import axios from "axios";
 
 const API_URL = "http://localhost:5005";
 
-function AddTask(props) {
+function AddFantasma(props) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // We need the project id when creating the new task
-    const { projectId } = props;
+    const { nuvolId } = props;
     // Create an object representing the body of the POST request
-    const requestBody = { title, description, projectId };
+    const requestBody = { title, description, nuvolId };
 
     axios
-      .post(`${API_URL}/api/tasks`, requestBody)
+      .post(`${API_URL}/api/fantasmes`, requestBody)
       .then((response) => {
         // Reset the state to clear the inputs
         setTitle("");
@@ -24,14 +23,14 @@ function AddTask(props) {
 
         // Invoke the callback function coming through the props
         // from the ProjectDetailsPage, to refresh the project details
-        props.refreshProject();
+        props.refreshNuvol();
       })
       .catch((error) => console.log(error));
   };
 
   return (
-    <div className="AddTask">
-      <h3>Add New Task</h3>
+    <div className="AddFantasma">
+      <h3>Add New Fantasma</h3>
 
       <form onSubmit={handleSubmit}>
         <label>Title:</label>
@@ -50,10 +49,10 @@ function AddTask(props) {
           onChange={(e) => setDescription(e.target.value)}
         />
 
-        <button type="submit">Add Task</button>
+        <button type="submit">Add Fantasma</button>
       </form>
     </div>
   );
 }
 
-export default AddTask;
+export default AddFantasma;

@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
+import AddFantasma from "../components/AddFantasma";
+import FantasmaCard from "../components/FantasmaCard";
 
 const API_URL = "http://localhost:5005";
 
@@ -31,6 +33,13 @@ function NuvolDetailsPage(props) {
           <p>kjsdnf</p>
         </>
       )}
+
+      <AddFantasma refreshNuvol={getNuvol} nuvolId={nuvolId} />
+
+      {nuvol &&
+        nuvol.fantasmes.map((fantasma) => (
+          <FantasmaCard key={fantasma._id} {...fantasma} />
+        ))}
 
       <Link to="/nuvols">
         <button>Back to nuvols</button>
