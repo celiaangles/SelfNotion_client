@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 
-// We are deconstructing props object directly in the parentheses of the function
 function NuvolCard({ papallona, cuc, _id }) {
   return (
     <div className="NuvolCard card">

@@ -36,7 +36,7 @@ function EditProjectPage(props) {
         setDescription(oneProject.description);
       })
       .catch((error) => console.log(error));
-  }, [projectId, isLoggedIn, authConfig]); // Include authConfig as a dependency
+  }, [projectId, isLoggedIn, authConfig]);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();

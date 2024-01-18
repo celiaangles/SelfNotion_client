@@ -3,20 +3,17 @@ import axios from "axios";
 
 import ProjectCard from "../components/ProjectCard";
 import AddProject from "../components/AddProject";
-
 import ObjectiuCard from "../components/ObjectiuCard";
 import AddObjectiu from "../components/AddObjectiu";
 
 const API_URL = "http://localhost:5005";
 
 function ProjectListPage() {
-  // const storedToken = localStorage.getItem("authToken");
-
   const [objectius, setObjectius] = useState([]);
-  const [showAddObjectiu, setShowAddObjectiu] = useState(false); // new
+  const [showAddObjectiu, setShowAddObjectiu] = useState(false);
 
   const [projects, setProjects] = useState([]);
-  const [showAddProject, setShowAddProject] = useState(false); // State to control visibility
+  const [showAddProject, setShowAddProject] = useState(false);
 
   const getAllProjects = () => {
     const storedToken = localStorage.getItem("authToken");
@@ -36,8 +33,6 @@ function ProjectListPage() {
       .catch((error) => console.log(error));
   };
 
-  // We set this effect will run only once, after the initial render
-  // by setting the empty dependency array - []
   useEffect(() => {
     getAllProjects();
   }, []);
@@ -56,7 +51,6 @@ function ProjectListPage() {
         Add Objectiu
       </button>
 
-      {/* Show AddProject component only when showAddProject state is true */}
       {showAddProject && <AddProject refreshProjects={getAllProjects} />}
       {showAddObjectiu && <AddObjectiu refreshObjectius={getAllObjectius} />}
 

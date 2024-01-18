@@ -11,18 +11,14 @@ function AddFantasma(props) {
     e.preventDefault();
 
     const { nuvolId } = props;
-    // Create an object representing the body of the POST request
     const requestBody = { title, description, nuvolId };
 
     axios
       .post(`${API_URL}/api/fantasmes`, requestBody)
       .then((response) => {
-        // Reset the state to clear the inputs
         setTitle("");
         setDescription("");
 
-        // Invoke the callback function coming through the props
-        // from the ProjectDetailsPage, to refresh the project details
         props.refreshNuvol();
       })
       .catch((error) => console.log(error));

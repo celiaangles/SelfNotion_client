@@ -15,7 +15,6 @@ function AddNuvol(props) {
     axios
       .post(`${API_URL}/api/nuvols`, requestBody)
       .then((response) => {
-        // Reset the state
         setPapallona("");
         setCuc("");
 

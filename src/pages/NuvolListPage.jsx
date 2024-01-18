@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-
 import NuvolCard from "../components/NuvolCard";
 import AddNuvol from "../components/AddNuvol";
 
@@ -15,7 +14,7 @@ function NuvolListPage() {
       .get(`${API_URL}/api/nuvols`)
       .then((response) => {
         console.log("API Response:", response.data);
-        setNuvols(response.data); // Adjust according to your response structure
+        setNuvols(response.data);
       })
       .catch((error) => console.log(error));
   };

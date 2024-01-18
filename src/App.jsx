@@ -5,14 +5,11 @@ import HomePage from "./pages/HomePage";
 import ProjectListPage from "./pages/ProjectListPage";
 import ProjectDetailsPage from "./pages/ProjectDetailsPage";
 import EditProjectPage from "./pages/EditProjectPage";
-
 import NuvolListPage from "./pages/NuvolListPage";
 import NuvolDetailsPage from "./pages/NuvolDetailsPage";
 import EditNuvolPage from "./pages/EditNuvolPage";
-
 import ObjectiuDetailsPage from "./pages/ObjectiuDetailsPage";
 import EditObjectiuPage from "./pages/EditObjectiuPage";
-
 import SignupPage from "./pages/SignupPage";
 import LoginPage from "./pages/LoginPage";
 import IsPrivate from "./components/IsPrivate";

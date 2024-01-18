@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
-import { AuthContext } from "../context/auth.context"; // Update the path
+import { AuthContext } from "../context/auth.context";
 
 const API_URL = "http://localhost:5005";
 
@@ -26,7 +26,6 @@ function AddProject(props) {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then((response) => {
-        // Reset the state
         setTitle("");
         setDescription("");
         props.refreshProjects();

@@ -4,11 +4,11 @@ import { AuthContext } from "../context/auth.context";
 
 function Navbar() {
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
-  const navigate = useNavigate(); // <== Use useNavigate instead of useHistory
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     logOutUser();
-    navigate("/login"); // <== Redirect to the login page after logout
+    navigate("/login");
   };
 
   return (

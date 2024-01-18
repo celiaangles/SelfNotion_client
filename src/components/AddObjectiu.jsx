@@ -15,7 +15,6 @@ function AddObjectiu(props) {
     axios
       .post(`${API_URL}/api/objectius`, requestBody)
       .then((response) => {
-        // Reset the state
         setSerp("");
         setMico("");
 

@@ -9,7 +9,6 @@ function UrgentCard({ project }) {
       </Link>
       <p>Description: {project.description}</p>
       <p>Character: {project.character}</p>
-      {/* Add more details or images if needed */}
     </div>
   );
 }

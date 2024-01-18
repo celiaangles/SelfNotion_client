@@ -3,14 +3,17 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import heart_icon from "../assets/react.svg";
 import { AuthContext } from "../context/auth.context";
-import UrgentCard from "../components/UrgentCard";
 
 const API_URL = "http://localhost:5005";
 
-function ProjectDetailsPage(props) {
+function ProjectDetailsPage() {
   const [project, setProject] = useState(null);
+  const [userId, setUserId] = useState("");
+
   const { projectId } = useParams();
   const navigate = useNavigate();
+
+  // const { user } = useContext(AuthContext);
 
   const getProject = () => {
     const storedToken = localStorage.getItem("authToken");
@@ -21,6 +24,7 @@ function ProjectDetailsPage(props) {
       .then((response) => {
         const oneProject = response.data;
         setProject(oneProject);
+        setUserId(response.data.userId);
       })
       .catch((error) => console.log(error));
   };
@@ -35,7 +39,6 @@ function ProjectDetailsPage(props) {
   const addUrgents = async () => {
     try {
       const storedToken = localStorage.getItem("authToken");
-      const projectId = project._id;
 
       const urgents = await axios.post(
         `${API_URL}/api/urgents/${projectId}`,
@@ -63,7 +66,7 @@ function ProjectDetailsPage(props) {
         <button>Back to projects</button>
       </Link>
 
-      <Link to={`/projects/edit/${projectId}`}>
+      <Link to={`å/projects/edit/${projectId}`}>
         <button>Edit Project</button>
       </Link>
 
@@ -71,9 +74,6 @@ function ProjectDetailsPage(props) {
         Add to favorites{" "}
         <img className="heart_like_img" alt="" src={heart_icon}></img>
       </button>
-
-      {/* Display UrgentCard if project is selected */}
-      {project && <UrgentCard key={project._id} project={project} />}
     </div>
   );
 }
