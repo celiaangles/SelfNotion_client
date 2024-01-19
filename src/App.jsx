@@ -12,7 +12,7 @@ import ObjectiuDetailsPage from "./pages/ObjectiuDetailsPage";
 import EditObjectiuPage from "./pages/EditObjectiuPage";
 import SignupPage from "./pages/SignupPage";
 import LoginPage from "./pages/LoginPage";
-import IsPrivate from "./components/IsPrivate";
+import IsPrivate from "./components/isPrivate";
 import IsAnon from "./components/IsAnon";
 
 function App() {

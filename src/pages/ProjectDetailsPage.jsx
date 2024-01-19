@@ -9,11 +9,10 @@ const API_URL = "http://localhost:5005";
 function ProjectDetailsPage() {
   const [project, setProject] = useState(null);
   const [userId, setUserId] = useState("");
-
-  const { projectId } = useParams();
   const navigate = useNavigate();
-
-  // const { user } = useContext(AuthContext);
+  const { projectId } = useParams();
+  const authContext = useContext(AuthContext);
+  const { user } = authContext;
 
   const getProject = () => {
     const storedToken = localStorage.getItem("authToken");
@@ -33,22 +32,19 @@ function ProjectDetailsPage() {
     getProject();
   }, []);
 
-  const authContext = useContext(AuthContext);
-  const { user } = authContext;
-
   const addUrgents = async () => {
     try {
       const storedToken = localStorage.getItem("authToken");
-
       const urgents = await axios.post(
-        `${API_URL}/api/urgents/${projectId}`,
-        { userId: user._id },
+        `${API_URL}/api/urgents`,
+        { userId: user._id, projectIds: [projectId] }, // Pass an array of project IDs
         { headers: { Authorization: `Bearer ${storedToken}` } }
       );
       console.log(urgents.data);
-      navigate("/home", { state: { selectedProject: project } });
+      navigate("/home", { state: { selectedProjects: urgents.data } });
+      console.log("Server response:", urgents.data);
     } catch (error) {
-      console.log(error);
+      console.error("Error adding urgents:", error);
     }
   };
 
@@ -66,7 +62,7 @@ function ProjectDetailsPage() {
         <button>Back to projects</button>
       </Link>
 
-      <Link to={`å/projects/edit/${projectId}`}>
+      <Link to={`/projects/edit/${projectId}`}>
         <button>Edit Project</button>
       </Link>
 
