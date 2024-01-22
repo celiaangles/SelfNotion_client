@@ -1,19 +1,28 @@
-import { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
+import { AuthContext } from "../context/auth.context";
 
 const API_URL = "http://localhost:5005";
 
 function AddNuvol(props) {
   const [papallona, setPapallona] = useState("");
   const [cuc, setCuc] = useState("");
+  const { user } = useContext(AuthContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!user) {
+      console.error("User not logged in.");
+      return;
+    }
 
-    const requestBody = { papallona, cuc };
+    const requestBody = { papallona, cuc, userId: user._id };
+    const storedToken = localStorage.getItem("authToken");
 
     axios
-      .post(`${API_URL}/api/nuvols`, requestBody)
+      .post(`${API_URL}/api/nuvols`, requestBody, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
       .then((response) => {
         setPapallona("");
         setCuc("");

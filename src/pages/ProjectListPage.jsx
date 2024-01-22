@@ -27,10 +27,17 @@ function ProjectListPage() {
   };
 
   const getAllObjectius = () => {
+    const storedToken = localStorage.getItem("authToken");
+
     axios
-      .get(`${API_URL}/api/objectius`)
+      .get(`${API_URL}/api/objectius`, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
       .then((response) => setObjectius(response.data))
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.error("Error fetching objectius:", error);
+        // Handle the error (e.g., show a message to the user)
+      });
   };
 
   useEffect(() => {
