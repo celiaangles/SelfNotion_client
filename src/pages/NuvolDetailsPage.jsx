@@ -8,6 +8,7 @@ const API_URL = "http://localhost:5005";
 
 function NuvolDetailsPage(props) {
   const [nuvol, setNuvol] = useState(null);
+  const [showAddFantasmaForm, setShowAddFantasmaForm] = useState(false); // State to control form visibility
   const { nuvolId } = useParams();
 
   const getNuvol = () => {
@@ -24,18 +25,26 @@ function NuvolDetailsPage(props) {
     getNuvol();
   }, []);
 
+  const handleToggleForm = () => {
+    setShowAddFantasmaForm(!showAddFantasmaForm);
+  };
+
   return (
     <div className="NuvolDetails">
       {nuvol && (
         <>
           <h1>{nuvol.papallona}</h1>
           <p>{nuvol.cuc}</p>
-          <p>kjsdnf</p>
         </>
       )}
 
-      <AddFantasma refreshNuvol={getNuvol} nuvolId={nuvolId} />
+      <button onClick={handleToggleForm}>
+        {showAddFantasmaForm ? "Hide Add Fantasma Form" : "Add Fantasma"}
+      </button>
 
+      {showAddFantasmaForm && (
+        <AddFantasma refreshNuvol={getNuvol} nuvolId={nuvolId} />
+      )}
       {nuvol &&
         nuvol.fantasmes.map((fantasma) => (
           <FantasmaCard key={fantasma._id} {...fantasma} />

@@ -26,8 +26,11 @@ function Navbar() {
             <button>Nuvols</button>
           </Link>
 
+          <Link to="/profilepage">
+            <button>{user && `${user.name}'s session`}</button>
+          </Link>
+
           <button onClick={handleLogout}>Logout</button>
-          <span>{user && user.name}</span>
         </>
       )}
 

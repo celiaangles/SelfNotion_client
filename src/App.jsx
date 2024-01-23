@@ -14,6 +14,7 @@ import SignupPage from "./pages/SignupPage";
 import LoginPage from "./pages/LoginPage";
 import IsPrivate from "./components/isPrivate";
 import IsAnon from "./components/IsAnon";
+import ProfilePage from "./pages/ProfilePage";
 
 function App() {
   return (
@@ -28,6 +29,15 @@ function App() {
             <IsPrivate>
               {" "}
               <ProjectListPage />{" "}
+            </IsPrivate>
+          }
+        />
+        <Route
+          path="/profilepage"
+          element={
+            <IsPrivate>
+              {" "}
+              <ProfilePage />{" "}
             </IsPrivate>
           }
         />
