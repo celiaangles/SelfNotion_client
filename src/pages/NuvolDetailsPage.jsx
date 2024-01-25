@@ -2,10 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import AddFantasma from "../components/AddFantasma";
-// import AddBruixa from "../components/AddBruixa";
-// import BruixaCard from "../components/BruixaCard";
-
-import FantasmaCard from "../components/FantasmaCard";
+import AddBruixa from "../components/AddBruixa";
+import Card from "../components/GenericCard";
 
 const API_URL = "http://localhost:5005";
 
@@ -21,7 +19,7 @@ function NuvolDetailsPage(props) {
       .get(`${API_URL}/api/nuvols/${nuvolId}`)
       .then((response) => {
         const oneNuvol = response.data;
-        console.log("API response:", response.data); // Log the entire response
+        console.log("API response:", response.data);
         setNuvol(oneNuvol);
       })
       .catch((error) => console.log("Error fetching data:", error));
@@ -33,21 +31,11 @@ function NuvolDetailsPage(props) {
 
   const handleToggleFantasmaForm = () => {
     setShowAddFantasmaForm(!showAddFantasmaForm);
-    // If hiding the form, reset the form fields
-    if (!showAddFantasmaForm) {
-      // Implement a function to reset the form fields in AddFantasma component
-      // Example: resetFormFields();
-    }
   };
 
-  // const handleToggleBruixaForm = () => {
-  //   setShowAddBruixaForm(!showAddBruixaForm);
-  //   // If hiding the form, reset the form fields
-  //   if (!showAddBruixaForm) {
-  //     // Implement a function to reset the form fields in AddFantasma component
-  //     // Example: resetFormFields();
-  //   }
-  // };
+  const handleToggleBruixaForm = () => {
+    setShowAddBruixaForm(!showAddBruixaForm);
+  };
 
   return (
     <div className="NuvolDetails">
@@ -65,32 +53,36 @@ function NuvolDetailsPage(props) {
       {showAddFantasmaForm && (
         <AddFantasma refreshNuvol={getNuvol} nuvolId={nuvolId} />
       )}
+
       {nuvol &&
-        nuvol.fantasmes && // Add null check for fantasmes
+        nuvol.fantasmes &&
         nuvol.fantasmes.map((fantasma) => (
-          <FantasmaCard
-            key={fantasma._id}
-            {...fantasma}
+          <Card
+            key={`Fantasma-${fantasma._id}`}
+            type="Fantasma"
+            data={fantasma}
             refreshNuvol={getNuvol}
           />
         ))}
 
-      {/* <button onClick={handleToggleBruixaForm}>
+      <button onClick={handleToggleBruixaForm}>
         {showAddBruixaForm ? "Hide Add Bruixa Form" : "Add Bruixa"}
-      </button> */}
-      {/* 
+      </button>
+
       {showAddBruixaForm && (
         <AddBruixa refreshNuvol={getNuvol} nuvolId={nuvolId} />
       )}
+
       {nuvol &&
-        nuvol.bruixes && // Add null check for bruixes
+        nuvol.bruixes &&
         nuvol.bruixes.map((bruixa) => (
-          <BruixaCard
-            key={bruixa._id} // Add a unique key prop
-            {...bruixa}
+          <Card
+            key={`Bruixa-${bruixa._id}`}
+            type="Bruixa"
+            data={bruixa}
             refreshNuvol={getNuvol}
           />
-        ))} */}
+        ))}
 
       <br />
 
