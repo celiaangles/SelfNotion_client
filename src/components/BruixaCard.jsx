@@ -3,14 +3,14 @@ import axios from "axios";
 
 const API_URL = "http://localhost:5005";
 
-function FantasmaCard({ _id, title, description, refreshNuvol }) {
+function BruixaCard({ _id, gat, peix, refreshNuvol }) {
   const [isEditing, setIsEditing] = useState(false);
-  const [updatedTitle, setUpdatedTitle] = useState(title);
-  const [updatedDescription, setUpdatedDescription] = useState(description);
+  const [updatedGat, setUpdatedGat] = useState(gat);
+  const [updatedPeix, setUpdatedPeix] = useState(peix);
 
   const handleDelete = () => {
     axios
-      .delete(`${API_URL}/api/fantasmes/${_id}`)
+      .delete(`${API_URL}/api/bruixes/${_id}`)
       .then(() => {
         refreshNuvol();
       })
@@ -19,13 +19,13 @@ function FantasmaCard({ _id, title, description, refreshNuvol }) {
 
   const handleUpdate = () => {
     axios
-      .put(`${API_URL}/api/fantasmes/${_id}`, {
-        title: updatedTitle,
-        description: updatedDescription,
+      .put(`${API_URL}/api/bruixes/${_id}`, {
+        gat: updatedGat,
+        peix: updatedPeix,
       })
       .then(() => {
         refreshNuvol();
-        setIsEditing(false); // Hide the form after updating
+        // setIsEditing(false); // Hide the form after updating
       })
       .catch((error) => console.log("Error updating Fantasma:", error));
   };
@@ -41,22 +41,22 @@ function FantasmaCard({ _id, title, description, refreshNuvol }) {
           <label>Title:</label>
           <input
             type="text"
-            value={updatedTitle}
-            onChange={(e) => setUpdatedTitle(e.target.value)}
+            value={updatedGat}
+            onChange={(e) => setUpdatedGat(e.target.value)}
           />
 
           <label>Description:</label>
           <textarea
-            value={updatedDescription}
-            onChange={(e) => setUpdatedDescription(e.target.value)}
+            value={updatedPeix}
+            onChange={(e) => setUpdatedPeix(e.target.value)}
           />
 
           <button onClick={handleUpdate}>Save</button>
         </div>
       ) : (
         <>
-          <h3>{title}</h3>
-          <p>{description}</p>
+          <h3>{gat}</h3>
+          <p>{peix}</p>
           <button onClick={handleDelete}>Delete</button>
           <button onClick={toggleEditForm}>Update</button>
         </>
@@ -65,4 +65,4 @@ function FantasmaCard({ _id, title, description, refreshNuvol }) {
   );
 }
 
-export default FantasmaCard;
+export default BruixaCard;

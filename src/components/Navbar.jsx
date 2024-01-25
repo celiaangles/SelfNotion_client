@@ -22,6 +22,10 @@ function Navbar() {
             <button>Projects</button>
           </Link>
 
+          <Link to="/bruixes">
+            <button>Bruixes</button>
+          </Link>
+
           <Link to="/nuvols">
             <button>Nuvols</button>
           </Link>

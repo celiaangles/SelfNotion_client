@@ -32,6 +32,7 @@ function App() {
             </IsPrivate>
           }
         />
+
         <Route
           path="/profilepage"
           element={
