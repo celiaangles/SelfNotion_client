@@ -9,6 +9,8 @@
 //   const [updatedDescription, setUpdatedDescription] = useState(
 //     data.description
 //   );
+//   const [updatedGarden, setUpdatedGarden] = useState(data.garden);
+//   const [updatedFlower, setUpdatedFlower] = useState(data.flower);
 
 //   // Destructuring data based on the type
 //   const { _id } = data;
@@ -16,7 +18,13 @@
 //   const handleDelete = () => {
 //     axios
 //       .delete(
-//         `${API_URL}/api/${type === "Fantasma" ? "fantasmes" : "bruixes"}/${_id}`
+//         `${API_URL}/api/${
+//           type === "Fantasma"
+//             ? "fantasmes"
+//             : type === "Bruixa"
+//             ? "bruixes"
+//             : "goblins"
+//         }/${_id}`
 //       )
 //       .then(() => {
 //         refreshNuvol();
@@ -25,15 +33,24 @@
 //   };
 
 //   const handleUpdate = () => {
-//     const updateData =
-//       type === "Fantasma"
-//         ? { title: updatedTitle, description: updatedDescription }
-//         : { gat: updatedGat, peix: updatedPeix };
+//     let updateData;
+
+//     if (type === "Fantasma") {
+//       updateData = { title: updatedTitle, description: updatedDescription };
+//     } else if (type === "Bruixa") {
+//       updateData = { gat: updatedGat, peix: updatedPeix };
+//     } else if (type === "Goblin") {
+//       updateData = { garden: updatedGarden, flower: updatedFlower };
+//     }
 
 //     axios
 //       .put(
 //         `${API_URL}/api/${
-//           type === "Fantasma" ? "fantasmes" : "bruixes"
+//           type === "Fantasma"
+//             ? "fantasmes"
+//             : type === "Bruixa"
+//             ? "bruixes"
+//             : "goblins"
 //         }/${_id}`,
 //         updateData
 //       )
@@ -55,21 +72,37 @@
 //           <label>Title:</label>
 //           <input
 //             type="text"
-//             value={type === "Fantasma" ? updatedTitle : updatedGat}
+//             value={
+//               type === "Fantasma"
+//                 ? updatedTitle
+//                 : type === "Bruixa"
+//                 ? updatedGarden
+//                 : updatedGarden
+//             }
 //             onChange={(e) =>
 //               type === "Fantasma"
 //                 ? setUpdatedTitle(e.target.value)
-//                 : setUpdatedGat(e.target.value)
+//                 : type === "Bruixa"
+//                 ? setUpdatedGarden(e.target.value)
+//                 : setUpdatedPeix(e.target.value)
 //             }
 //           />
 
 //           <label>Description:</label>
 //           <textarea
-//             value={type === "Fantasma" ? updatedDescription : updatedPeix}
+//             value={
+//               type === "Fantasma"
+//                 ? updatedDescription
+//                 : type === "Bruixa"
+//                 ? updatedFlower
+//                 : updatedFlower
+//             }
 //             onChange={(e) =>
 //               type === "Fantasma"
 //                 ? setUpdatedDescription(e.target.value)
-//                 : setUpdatedPeix(e.target.value)
+//                 : type === "Bruixa"
+//                 ? setUpdatedGarden(e.target.value)
+//                 : setUpdatedFlower(e.target.value)
 //             }
 //           />
 
@@ -77,8 +110,20 @@
 //         </div>
 //       ) : (
 //         <>
-//           <h3>{type === "Fantasma" ? data.title : data.gat}</h3>
-//           <p>{type === "Fantasma" ? data.description : data.peix}</p>
+//           <h3>
+//             {type === "Fantasma"
+//               ? data.title
+//               : type === "Bruixa"
+//               ? data.gat
+//               : data.garden}
+//           </h3>
+//           <p>
+//             {type === "Fantasma"
+//               ? data.description
+//               : type === "Bruixa"
+//               ? data.peix
+//               : data.flower}
+//           </p>
 //           <button onClick={handleDelete}>Delete</button>
 //           <button onClick={toggleEditForm}>Update</button>
 //         </>
@@ -96,12 +141,12 @@ const API_URL = "http://localhost:5005";
 
 function Card({ type, data, refreshNuvol }) {
   const [isEditing, setIsEditing] = useState(false);
-  const [updatedTitle, setUpdatedTitle] = useState(data.title);
+  const [updatedTitle, setUpdatedTitle] = useState(data.title || "");
   const [updatedDescription, setUpdatedDescription] = useState(
-    data.description
+    data.description || ""
   );
-  const [updatedGarden, setUpdatedGarden] = useState(data.garden);
-  const [updatedFlower, setUpdatedFlower] = useState(data.flower);
+  const [updatedGarden, setUpdatedGarden] = useState(data.garden || "");
+  const [updatedFlower, setUpdatedFlower] = useState(data.flower || "");
 
   // Destructuring data based on the type
   const { _id } = data;
@@ -129,7 +174,7 @@ function Card({ type, data, refreshNuvol }) {
     if (type === "Fantasma") {
       updateData = { title: updatedTitle, description: updatedDescription };
     } else if (type === "Bruixa") {
-      updateData = { gat: updatedGat, peix: updatedPeix };
+      updateData = { gat: updatedGarden, peix: updatedFlower };
     } else if (type === "Goblin") {
       updateData = { garden: updatedGarden, flower: updatedFlower };
     }
@@ -167,15 +212,15 @@ function Card({ type, data, refreshNuvol }) {
               type === "Fantasma"
                 ? updatedTitle
                 : type === "Bruixa"
-                ? updatedGat
+                ? updatedGarden
                 : updatedGarden
             }
             onChange={(e) =>
               type === "Fantasma"
                 ? setUpdatedTitle(e.target.value)
                 : type === "Bruixa"
-                ? setUpdatedGat(e.target.value)
-                : setUpdatedGarden(e.target.value)
+                ? setUpdatedGarden(e.target.value)
+                : setUpdatedPeix(e.target.value)
             }
           />
 
@@ -185,14 +230,14 @@ function Card({ type, data, refreshNuvol }) {
               type === "Fantasma"
                 ? updatedDescription
                 : type === "Bruixa"
-                ? updatedPeix
+                ? updatedFlower
                 : updatedFlower
             }
             onChange={(e) =>
               type === "Fantasma"
                 ? setUpdatedDescription(e.target.value)
                 : type === "Bruixa"
-                ? setUpdatedPeix(e.target.value)
+                ? setUpdatedGarden(e.target.value)
                 : setUpdatedFlower(e.target.value)
             }
           />
