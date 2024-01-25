@@ -22,16 +22,25 @@ function Navbar() {
             <button>Projects</button>
           </Link>
 
-          <Link to="/bruixes">
-            <button>Bruixes</button>
-          </Link>
-
           <Link to="/nuvols">
             <button>Nuvols</button>
           </Link>
 
           <Link to="/profilepage">
-            <button>{user && `${user.name}'s session`}</button>
+            {/* Render user's profile picture as a label */}
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <img
+                src={`/uploads/${user.profilePicture}`}
+                alt="Profile"
+                style={{
+                  width: "30px",
+                  height: "30px",
+                  borderRadius: "50%",
+                  marginRight: "8px",
+                }}
+              />
+              {/* <button>PROFILE</button> */}
+            </div>
           </Link>
 
           <button onClick={handleLogout}>Logout</button>

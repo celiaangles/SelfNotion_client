@@ -3,6 +3,8 @@ import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import AddFantasma from "../components/AddFantasma";
 import AddBruixa from "../components/AddBruixa";
+import AddGoblin from "../components/AddGoblin";
+
 import Card from "../components/GenericCard";
 
 const API_URL = "http://localhost:5005";
@@ -11,6 +13,7 @@ function NuvolDetailsPage(props) {
   const [nuvol, setNuvol] = useState(null);
   const [showAddFantasmaForm, setShowAddFantasmaForm] = useState(false);
   const [showAddBruixaForm, setShowAddBruixaForm] = useState(false);
+  const [showAddGoblinForm, setShowAddGoblinForm] = useState(false);
 
   const { nuvolId } = useParams();
 
@@ -35,6 +38,10 @@ function NuvolDetailsPage(props) {
 
   const handleToggleBruixaForm = () => {
     setShowAddBruixaForm(!showAddBruixaForm);
+  };
+
+  const handleToggleGoblinForm = () => {
+    setShowAddGoblinForm(!showAddGoblinForm);
   };
 
   return (
@@ -86,7 +93,25 @@ function NuvolDetailsPage(props) {
 
       <br />
 
-      <h1>joder</h1>
+      <button onClick={handleToggleGoblinForm}>
+        {showAddGoblinForm ? "Hide Add Goblin Form" : "Add Goblin"}
+      </button>
+
+      {showAddGoblinForm && (
+        <AddGoblin refreshNuvol={getNuvol} nuvolId={nuvolId} />
+      )}
+
+      {nuvol &&
+        nuvol.goblins &&
+        nuvol.goblins.map((goblin) => (
+          <Card
+            key={`Goblin-${goblin._id}`}
+            type="Goblin"
+            data={goblin}
+            refreshNuvol={getNuvol}
+          />
+        ))}
+
       <br />
 
       <Link to="/nuvols">
