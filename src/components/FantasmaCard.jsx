@@ -1,15 +1,11 @@
 import React from "react";
 import Card from "./GenericCard"; // Adjust the import path as needed
 
-// FantasmaCard
-function FantasmaCard({ _id, title, description, refreshNuvol }) {
+// BruixaCard
+function BruixaCard({ _id, gat, peix, refreshNuvol }) {
   return (
-    <Card
-      type="Fantasma"
-      data={{ _id, title, description }}
-      refreshNuvol={refreshNuvol}
-    />
+    <Card type="Bruixa" data={{ _id, gat, peix }} refreshNuvol={refreshNuvol} />
   );
 }
 
-export default FantasmaCard;
+export default BruixaCard;
