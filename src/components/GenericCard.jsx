@@ -1,4 +1,3 @@
-// export default Card;
 import React, { useState } from "react";
 import axios from "axios";
 
@@ -32,6 +31,24 @@ function Card({ type, data, refreshNuvol }) {
         refreshNuvol();
       })
       .catch((error) => console.log(`Error deleting ${type}:`, error));
+  };
+  const getImageElement = () => {
+    if (
+      type === "Goblin" &&
+      data.flower &&
+      data.flower.contentType &&
+      data.flower.data
+    ) {
+      return (
+        <img
+          src={`data:${
+            data.flower.contentType
+          };base64,${data.flower.data.toString("base64")}`}
+          alt="Flower"
+        />
+      );
+    }
+    return null;
   };
 
   const handleUpdate = () => {
@@ -80,41 +97,10 @@ function Card({ type, data, refreshNuvol }) {
       {isEditing ? (
         <div>
           <label>Title:</label>
-          <input
-            type="text"
-            value={
-              type === "Fantasma"
-                ? updatedTitle
-                : type === "Bruixa"
-                ? updatedGarden
-                : updatedGarden
-            }
-            onChange={(e) =>
-              type === "Fantasma"
-                ? setUpdatedTitle(e.target.value)
-                : type === "Bruixa"
-                ? setUpdatedGarden(e.target.value)
-                : setUpdatedPeix(e.target.value)
-            }
-          />
+          {/* ... (existing code) */}
 
           <label>Description:</label>
-          <textarea
-            value={
-              type === "Fantasma"
-                ? updatedDescription
-                : type === "Bruixa"
-                ? updatedFlower
-                : updatedFlower
-            }
-            onChange={(e) =>
-              type === "Fantasma"
-                ? setUpdatedDescription(e.target.value)
-                : type === "Bruixa"
-                ? setUpdatedGarden(e.target.value)
-                : setUpdatedFlower(e.target.value)
-            }
-          />
+          {/* ... (existing code) */}
 
           <button onClick={handleUpdate}>Save</button>
         </div>
@@ -127,12 +113,15 @@ function Card({ type, data, refreshNuvol }) {
               ? data.gat
               : data.garden}
           </h3>
+          {getImageElement()} {/* Add this line to display the image */}
           <p style={colorStyle}>
             {type === "Fantasma"
               ? data.description
               : type === "Bruixa"
               ? data.peix
-              : data.flower}
+              : type === "Goblin"
+              ? `ContentType: ${data.flower.contentType}, Data: ${data.flower.data}`
+              : ""}
           </p>
           <button onClick={handleDelete}>Delete</button>
           <button onClick={toggleEditForm}>Update</button>

@@ -20,6 +20,7 @@ function EditObjectiuPage(props) {
 
   const [serp, setSerp] = useState("");
   const [mico, setMico] = useState("");
+  const [mussol, setMussol] = useState("");
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -33,13 +34,14 @@ function EditObjectiuPage(props) {
         const oneObjectiu = response.data;
         setSerp(oneObjectiu.serp);
         setMico(oneObjectiu.mico);
+        setMussol(oneObjectiu.mussol);
       })
       .catch((err) => console.log(err));
   }, [objectiuId, isLoggedIn, authConfig]);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    const requestBody = { serp, mico };
+    const requestBody = { serp, mico, mussol };
 
     axios
       .put(`${API_URL}/api/objectius/${objectiuId}`, authConfig)
@@ -75,6 +77,13 @@ function EditObjectiuPage(props) {
           name="mico"
           value={mico}
           onChange={(e) => setMico(e.target.value)}
+        />
+
+        <label>Mussol:</label>
+        <textarea
+          name="mussol"
+          value={mussol}
+          onChange={(e) => setMussol(e.target.value)}
         />
 
         <button type="submit">Update Objectiu</button>

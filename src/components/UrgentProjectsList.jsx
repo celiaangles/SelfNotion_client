@@ -24,7 +24,6 @@ const UrgentProjectsList = ({ userId }) => {
           <li key={project._id} style={{ marginBottom: "20px" }}>
             <strong>{project.title}</strong> <br />
             {project.description}
-            <hr />
           </li>
         ))}
       </ul>

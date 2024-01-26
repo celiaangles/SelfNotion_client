@@ -7,6 +7,8 @@ const API_URL = "http://localhost:5005";
 function AddProject(props) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [phone, setPhone] = useState("");
+
   const { user } = useContext(AuthContext);
 
   const handleSubmit = (e) => {
@@ -17,7 +19,7 @@ function AddProject(props) {
       return;
     }
 
-    const requestBody = { title, description, userId: user._id };
+    const requestBody = { title, description, phone, userId: user._id };
 
     const storedToken = localStorage.getItem("authToken");
 
@@ -28,6 +30,7 @@ function AddProject(props) {
       .then((response) => {
         setTitle("");
         setDescription("");
+        setPhone("");
         props.refreshProjects();
       })
       .catch((error) => console.log(error));
@@ -52,6 +55,14 @@ function AddProject(props) {
           name="description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
+        />
+
+        <label>Phone:</label>
+        <textarea
+          type="text"
+          name="phone"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
         />
 
         <button type="submit">Submit</button>

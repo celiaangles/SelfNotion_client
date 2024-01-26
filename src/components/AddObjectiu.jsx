@@ -7,6 +7,8 @@ const API_URL = "http://localhost:5005";
 function AddObjectiu(props) {
   const [serp, setSerp] = useState("");
   const [mico, setMico] = useState("");
+  const [mussol, setMussol] = useState("");
+
   const { user } = useContext(AuthContext);
 
   const handleSubmit = (e) => {
@@ -16,7 +18,7 @@ function AddObjectiu(props) {
       return;
     }
 
-    const requestBody = { serp, mico, userId: user._id };
+    const requestBody = { serp, mico, mussol, userId: user._id };
     const storedToken = localStorage.getItem("authToken");
 
     axios
@@ -26,6 +28,7 @@ function AddObjectiu(props) {
       .then((response) => {
         setSerp("");
         setMico("");
+        setMussol("");
 
         props.refreshObjectius();
       })
@@ -51,6 +54,14 @@ function AddObjectiu(props) {
           name="mico"
           value={mico}
           onChange={(e) => setMico(e.target.value)}
+        />
+
+        <label>Mussol:</label>
+        <textarea
+          type="text"
+          name="mussol"
+          value={mussol}
+          onChange={(e) => setMussol(e.target.value)}
         />
 
         <button type="submit">Submit</button>

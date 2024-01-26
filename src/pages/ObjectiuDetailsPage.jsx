@@ -27,7 +27,8 @@ function ObjectiuDetailsPage(props) {
       {objectiu && (
         <>
           <h1>{objectiu.serp}</h1>
-          <p>{objectiu.mico}</p>
+          <h2>{objectiu.mico}</h2>
+          <p>{objectiu.mussol}</p>
         </>
       )}
 
