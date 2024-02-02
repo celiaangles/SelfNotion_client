@@ -30,12 +30,13 @@ function ProjectCard({ title, description, _id, showButton = true, onDelete }) {
         if (onDelete) {
           onDelete(_id);
         }
+        window.location.reload();
       })
       .catch((err) => console.log(err));
   };
 
   const typographyStyle = {
-    color: isButtonClicked ? "green" : "#646cff",
+    color: isButtonClicked ? "#222222" : "#cacaca",
   };
 
   return (
@@ -43,7 +44,7 @@ function ProjectCard({ title, description, _id, showButton = true, onDelete }) {
       {showButton && (
         <button className="button01" onClick={handleButtonClick}>
           {isButtonClicked ? (
-            <img alt="" />
+            <img src="" alt="undone" />
           ) : (
             <img
               src="../../public/done_FILL0_wght400_GRAD0_opsz24.png"
@@ -54,51 +55,33 @@ function ProjectCard({ title, description, _id, showButton = true, onDelete }) {
       )}
       <Link to={`/projects/${_id}`}>
         <div className="tasca">
-          <h3 className="title">{title}</h3>
-          <p className="description">{description}</p>
+          <h3 style={typographyStyle} className="title">
+            {title}
+          </h3>
+          <p style={typographyStyle} className="description">
+            {description}
+          </p>
         </div>
       </Link>
+
       {showButton && (
-        <button className="button02" onClick={handleDeleteClick}>
-          <img
-            src="../../public/delete_FILL0_wght400_GRAD0_opsz24 (1).png"
-            alt="delete"
-          />
-        </button>
+        <>
+          <button className="button02" onClick={handleDeleteClick}>
+            <img
+              src="../../public/delete_FILL0_wght400_GRAD0_opsz24 (1).png"
+              alt="delete"
+            />
+          </button>
+          <button className="button02">
+            <img
+              src="../../public/add_FILL0_wght400_GRAD0_opsz24 (1).png"
+              alt="plus"
+            />{" "}
+          </button>
+        </>
       )}
     </div>
   );
-
-  // return (
-  //   <div className="ProjectCard">
-  //     <Link to={`/projects/${_id}`}>
-  //       <div className="tasca">
-  //         <h3 className="title">{title}</h3>
-  //         <p className="description">{description}</p>
-  //       </div>
-  //     </Link>
-  //     {showButton && (
-  //       <>
-  //         <button className="button01" onClick={handleButtonClick}>
-  //           {isButtonClicked ? (
-  //             <img alt="" />
-  //           ) : (
-  //             <img
-  //               src="../../public/done_FILL0_wght400_GRAD0_opsz24.png"
-  //               alt="Done"
-  //             />
-  //           )}
-  //         </button>
-  //         <button className="button02" onClick={handleDeleteClick}>
-  //           <img
-  //             src="../../public/delete_FILL0_wght400_GRAD0_opsz24 (1).png"
-  //             alt="delete"
-  //           />
-  //         </button>
-  //       </>
-  //     )}
-  //   </div>
-  // );
 }
 
 export default ProjectCard;

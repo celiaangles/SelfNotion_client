@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import "../styles/ProjectsObjectius.css";
 
 import ProjectCard from "../components/ProjectCard";
 import AddProject from "../components/AddProject";
@@ -50,24 +51,32 @@ function ProjectListPage() {
 
   return (
     <div className="ProjectListPage">
-      <button onClick={() => setShowAddProject(!showAddProject)}>
-        Add Project
-      </button>
-
-      <button onClick={() => setShowAddObjectiu(!showAddObjectiu)}>
-        Add Objectiu
-      </button>
-
       {showAddProject && <AddProject refreshProjects={getAllProjects} />}
       {showAddObjectiu && <AddObjectiu refreshObjectius={getAllObjectius} />}
+      <div className="projects">
+        {projects.map((project) => (
+          <ProjectCard key={project._id} {...project} />
+        ))}
 
-      {projects.map((project) => (
-        <ProjectCard key={project._id} {...project} />
-      ))}
+        <button
+          className="button03"
+          onClick={() => setShowAddProject(!showAddProject)}
+        >
+          ADD PROJECT
+        </button>
+      </div>
 
-      {objectius.map((objectiu) => (
-        <ObjectiuCard key={objectiu._id} {...objectiu} />
-      ))}
+      <div className="objectius">
+        {objectius.map((objectiu) => (
+          <ObjectiuCard key={objectiu._id} {...objectiu} />
+        ))}
+        <button
+          className="button03"
+          onClick={() => setShowAddObjectiu(!showAddObjectiu)}
+        >
+          ADD OBJECTIU
+        </button>
+      </div>
     </div>
   );
 }
