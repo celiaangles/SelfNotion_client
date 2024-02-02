@@ -8,6 +8,8 @@ const API_URL = "http://localhost:5005";
 
 function ProjectDetailsPage() {
   const [project, setProject] = useState(null);
+  const [isInUrgents, setIsInUrgents] = useState(false); // Initialize isInUrgents state
+
   const [userId, setUserId] = useState("");
   const navigate = useNavigate();
   const { projectId } = useParams();
@@ -24,13 +26,17 @@ function ProjectDetailsPage() {
         const oneProject = response.data;
         setProject(oneProject);
         setUserId(response.data.userId);
+        // Check if the project is in urgents
+        setIsInUrgents(user && user.urgents.includes(projectId));
       })
       .catch((error) => console.log(error));
   };
 
   useEffect(() => {
-    getProject();
-  }, []);
+    if (projectId) {
+      getProject();
+    }
+  }, [projectId]);
 
   const addUrgents = async () => {
     try {
@@ -45,6 +51,20 @@ function ProjectDetailsPage() {
       console.log("Server response:", urgents.data);
     } catch (error) {
       console.error("Error adding urgents:", error);
+    }
+  };
+
+  const removeFromUrgents = async () => {
+    try {
+      const storedToken = localStorage.getItem("authToken");
+      await axios.delete(`${API_URL}/api/urgents/remove`, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+        data: { userId: user._id, projectIds: [projectId] }, // Pass an array of project IDs
+      });
+      console.log("Successfully removed from urgents");
+      // You might want to update the state or do other actions after removal
+    } catch (error) {
+      console.error("Error removing from urgents:", error);
     }
   };
 
@@ -70,6 +90,13 @@ function ProjectDetailsPage() {
         Add to favorites{" "}
         <img className="heart_like_img" alt="" src={heart_icon}></img>
       </button>
+
+      <button className="heart_like" onClick={removeFromUrgents}>
+        Remove from favorites
+      </button>
+      <h2 style={{ color: isInUrgents ? "green" : "inherit" }}>
+        project details page
+      </h2>
     </div>
   );
 }
