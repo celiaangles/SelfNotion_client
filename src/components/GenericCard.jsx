@@ -37,13 +37,15 @@ function Card({ type, data, refreshNuvol }) {
       type === "Goblin" &&
       data.flower &&
       data.flower.contentType &&
-      data.flower.data
+      data.flower.data &&
+      data.flower.data.data // Assuming the image data is stored in a 'data' property
     ) {
+      console.log("Image Data:", data.flower);
       return (
         <img
           src={`data:${
             data.flower.contentType
-          };base64,${data.flower.data.toString("base64")}`}
+          };base64,${data.flower.data.data.toString("base64")}`}
           alt="Flower"
         />
       );

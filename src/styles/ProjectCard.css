@@ -1,0 +1,53 @@
+.tasca {
+  border: 1px solid #ccc;
+  width: 500px;
+  max-height: 50px;
+  border-radius: 8px;
+  padding: 16px;
+  align-items: center;
+
+  margin: 16px;
+
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+
+  h3 {
+    color: #646cff;
+  }
+
+  p {
+    color: #333;
+  }
+}
+
+.ProjectCard {
+  padding: 4px;
+  margin: 4px;
+  display: flex;
+  justify-content: space-between;
+  max-width: 400px;
+  max-height: 200px;
+  align-items: center;
+}
+
+.button01 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  border: 1.2px solid #ccc;
+  background-color: #f4f4f4;
+  width: 30px;
+  height: 30px;
+}
+
+.button02 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: unset;
+  background-color: unset;
+  width: 30px;
+  height: 30px;
+}

@@ -54,14 +54,6 @@ function AddGoblin(props) {
           onChange={(e) => setGarden(e.target.value)}
         />
 
-        <label>Flower Description:</label>
-        <textarea
-          type="text"
-          name="flower"
-          value={flower}
-          onChange={(e) => setFlower(e.target.value)}
-        />
-
         <label>Flower Image:</label>
         <input type="file" name="flower" onChange={handleImageChange} />
 

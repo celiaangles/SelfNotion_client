@@ -96,6 +96,7 @@ const ProfilePage = () => {
         setAdditionalInfo({ bio: "", location: "" });
         // Exit edit mode
         setEditMode(false);
+        window.location.reload();
       })
       .catch((error) => {
         console.error("Error updating user information:", error);

@@ -33,11 +33,6 @@ const UrgentProjectsList = ({ userId }) => {
       );
   }, [userId]);
 
-  const handleDeleteProject = (projectId) => {
-    // Implement the logic to delete the project
-    console.log(`Deleting project with ID: ${projectId}`);
-  };
-
   return (
     <div>
       <ul style={{ listStyleType: "none", padding: 0 }}>
@@ -68,7 +63,6 @@ const UrgentProjectsList = ({ userId }) => {
                   description={project.description}
                   _id={project._id}
                   showButton={false}
-                  onDelete={handleDeleteProject}
                 />
               </Link>
             )}
